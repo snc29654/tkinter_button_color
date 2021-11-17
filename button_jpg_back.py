@@ -31,7 +31,7 @@ from tkinter.scrolledtext import ScrolledText
 
 class color_button(ttk.Combobox):
     def __init__(self, var, master=None):
-
+        self.f = open('color_code.txt', 'w')
         self.r=100
         self.g=100
         self.b=100
@@ -105,8 +105,9 @@ class color_button(ttk.Combobox):
                 btn = tk.Button(root, text="    ")
                 btn.grid(column=column, row=row)
                 #print(self.from_rgb_to_colorcode((self.r, self.g, self.b)))
+                self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
                 btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
-
+        self.f.close()
     def collback(self,btn):
         def nothing():
             global color
