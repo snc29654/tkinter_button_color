@@ -69,6 +69,7 @@ class color_button(ttk.Combobox):
             button4= Button(root, text=u'表示', font=24,command=self.button4_clicked,bg='#f0e68c')  
             button4.grid(row=0, column=1)  
             button4.place(x=950, y=100) 
+            self.f = open('color_code.txt', 'w')
 
 
     def button4_clicked(self):  
@@ -105,9 +106,9 @@ class color_button(ttk.Combobox):
                 btn = tk.Button(root, text="    ")
                 btn.grid(column=column, row=row)
                 #print(self.from_rgb_to_colorcode((self.r, self.g, self.b)))
-                #self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
+                self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
                 btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
-        #self.f.close()
+        self.f.close()
     def collback(self,btn):
         def nothing():
             global color
