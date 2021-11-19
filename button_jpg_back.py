@@ -31,7 +31,23 @@ from tkinter.scrolledtext import ScrolledText
 
 class color_button(ttk.Combobox):
     def __init__(self, var, master=None):
-        #self.f = open('color_code.txt', 'w')
+
+
+# テキストボックス
+        self.txt1 = tkinter.Entry(width=5)
+        self.txt1.place(x=1000, y=150)
+        self.txt1.insert(tkinter.END,"40")
+        
+        lbl1 = tkinter.Label(text='横数')
+        lbl1.place(x=950, y=150)
+# テキストボックス
+        self.txt2 = tkinter.Entry(width=5)
+        self.txt2.place(x=1000, y=180)
+        self.txt2.insert(tkinter.END,"42")
+
+        lbl2 = tkinter.Label(text='縦数')
+        lbl2.place(x=950, y=150)
+
         self.r=100
         self.g=100
         self.b=100
@@ -68,7 +84,7 @@ class color_button(ttk.Combobox):
         if(self.filenames != ""):
             button4= Button(root, text=u'表示', font=24,command=self.button4_clicked,bg='#f0e68c')  
             button4.grid(row=0, column=1)  
-            button4.place(x=950, y=100) 
+            button4.place(x=950, y=110) 
             self.f = open('color_code.txt', 'w')
 
 
@@ -79,22 +95,26 @@ class color_button(ttk.Combobox):
     def show_selected(self, event):
         self.color = self.get()        
     def setnumber(self):
+        
+        
+        column_max =int(self.txt1.get())
+        row_max =int(self.txt2.get())
         for file in self.filenames:
             img2 = Image.open(file)
         image2 = img2.convert('RGB')
         width, height = image2.size
 
-        column_step=int(width/40)        
-        row_step=int(height/42)
+        column_step=int(width/column_max)        
+        row_step=int(height/row_max)
         print(width, height)
         print(column_step,row_step)
                 
         column = -1
         row = 0
-        for i in range(1121):
+        for i in range(column_max*row_max):
             
             if i > 0:
-                if i%40 == 1:
+                if i%column_max == 1:
                     row += 1 
                     column = -1
                 column += 1
