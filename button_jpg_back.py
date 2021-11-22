@@ -36,17 +36,17 @@ class color_button(ttk.Combobox):
 # テキストボックス
         self.txt1 = tkinter.Entry(width=5)
         self.txt1.place(x=1000, y=150)
-        self.txt1.insert(tkinter.END,"40")
+        self.txt1.insert(tkinter.END,"80")
         
-        lbl1 = tkinter.Label(text='横数')
+        lbl1 = tkinter.Label(text='横数(x)')
         lbl1.place(x=950, y=150)
 # テキストボックス
         self.txt2 = tkinter.Entry(width=5)
         self.txt2.place(x=1000, y=180)
-        self.txt2.insert(tkinter.END,"42")
+        self.txt2.insert(tkinter.END,"100")
 
-        lbl2 = tkinter.Label(text='縦数')
-        lbl2.place(x=950, y=150)
+        lbl2 = tkinter.Label(text='縦数(y)')
+        lbl2.place(x=950, y=180)
 
         self.r=100
         self.g=100
