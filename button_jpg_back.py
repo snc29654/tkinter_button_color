@@ -33,6 +33,7 @@ class color_button(ttk.Combobox):
     def __init__(self, var, master=None):
 
         self.end=0
+        self.button_disp=0
 
 # テキストボックス
         self.txt1 = tkinter.Entry(width=5)
@@ -86,20 +87,33 @@ class color_button(ttk.Combobox):
         fTyp = [('', '*')] 
         iDir = os.path.abspath(os.path.dirname(__file__)) 
         self.filenames = tkFileDialog.askopenfilenames(filetypes= [("JPEG", ".jpg")], initialdir=iDir)
+        self.f = open('color_code.txt', 'w')
 
         if(self.filenames != ""):
             button4= Button(root, text=u'表示', font=24,command=self.button4_clicked,bg='#f0e68c')  
             button4.grid(row=0, column=1)  
             button4.place(x=950, y=110) 
-            self.f = open('color_code.txt', 'w')
+ 
+            button4= Button(root, text=u'変換', font=24,command=self.button5_clicked,bg='#f0e68c')  
+            button4.grid(row=0, column=1)  
+            button4.place(x=1000, y=110) 
+
 
 
     def button4_clicked(self):  
-        #self.setnumber()
+        self.button_disp=1
         thread1 = threading.Thread(target=self.setnumber)
         thread1.start()
         thread2 = threading.Thread(target=self.update_counter)
         thread2.start()
+
+    def button5_clicked(self):  
+        self.button_disp=0
+        thread1 = threading.Thread(target=self.setnumber)
+        thread1.start()
+        thread2 = threading.Thread(target=self.update_counter)
+        thread2.start()
+
 
 
     def show_selected(self, event):
@@ -132,11 +146,11 @@ class color_button(ttk.Combobox):
                 self.r, self.g, self.b = image2.getpixel((column*column_step, row*row_step))
 
                 text=f'{i}'
-                btn = tk.Button(root, text="    ")
-                btn.grid(column=column, row=row)
-                #print(self.from_rgb_to_colorcode((self.r, self.g, self.b)))
+                if (self.button_disp == 1):
+                    btn = tk.Button(root, text="    ")
+                    btn.grid(column=column, row=row)
+                    btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
                 self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
-                btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
         self.f.close()
         self.counter="end"
         self.end=1
@@ -148,9 +162,6 @@ class color_button(ttk.Combobox):
 
     def from_rgb_to_colorcode(self,rgb):
         return "#%02x%02x%02x" % rgb
-    def rgb2html(self,R, G, B):
-        color_code = '#{}{}{}'.format(hex(R), hex(G), hex(B))
-        return color_code.replace('0x', '')
     
     def update_counter(self):
         while(1):
