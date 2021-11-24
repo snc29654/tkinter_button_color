@@ -32,6 +32,7 @@ from tkinter.scrolledtext import ScrolledText
 class color_button(ttk.Combobox):
     def __init__(self, var, master=None):
 
+        self.end=0
 
 # テキストボックス
         self.txt1 = tkinter.Entry(width=5)
@@ -48,6 +49,11 @@ class color_button(ttk.Combobox):
         lbl2 = tkinter.Label(text='縦数(y)')
         lbl2.place(x=950, y=180)
 
+
+
+
+
+        self.counter=0
         self.r=100
         self.g=100
         self.b=100
@@ -89,13 +95,16 @@ class color_button(ttk.Combobox):
 
 
     def button4_clicked(self):  
-        self.setnumber()
+        #self.setnumber()
+        thread1 = threading.Thread(target=self.setnumber)
+        thread1.start()
+        thread2 = threading.Thread(target=self.update_counter)
+        thread2.start()
 
 
     def show_selected(self, event):
         self.color = self.get()        
     def setnumber(self):
-        
         
         column_max =int(self.txt1.get())
         row_max =int(self.txt2.get())
@@ -112,7 +121,7 @@ class color_button(ttk.Combobox):
         column = -1
         row = 0
         for i in range(column_max*row_max):
-            
+            self.counter=str(i)
             if i > 0:
                 if i%column_max == 1:
                     row += 1 
@@ -129,6 +138,8 @@ class color_button(ttk.Combobox):
                 self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
                 btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
         self.f.close()
+        self.counter="end"
+        self.end=1
     def collback(self,btn):
         def nothing():
             global color
@@ -141,6 +152,15 @@ class color_button(ttk.Combobox):
         color_code = '#{}{}{}'.format(hex(R), hex(G), hex(B))
         return color_code.replace('0x', '')
     
+    def update_counter(self):
+        while(1):
+            self.lable = tkinter.Label(text=self.counter, width=8, height=2,font=('Helvetica', '20'), fg='white', bg='black')
+            self.lable.place(x=950, y=210)
+            if(self.end==1):
+                break
+            time.sleep(0.2)
+                    
+    
     
 root = tk.Tk()
 root.geometry('1100x750')
@@ -151,6 +171,10 @@ l = tk.Label(textvariable=var,font=48)
 l.place(x=700,y=750)
 c=color_button(master=root, var=var)
 c.place(x=950,y=0)
+
+
+
+
 root.mainloop()
 
 
