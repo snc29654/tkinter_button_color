@@ -87,7 +87,7 @@ class color_button(ttk.Combobox):
         fTyp = [('', '*')] 
         iDir = os.path.abspath(os.path.dirname(__file__)) 
         self.filenames = tkFileDialog.askopenfilenames(filetypes= [("JPEG", ".jpg")], initialdir=iDir)
-        self.f = open('color_code.txt', 'w')
+        self.f = open(r"C:\xampp\htdocs\xampp\shishu\color_code.txt", "w")
 
         if(self.filenames != ""):
             button4= Button(root, text=u'表示', font=24,command=self.button4_clicked,bg='#f0e68c')  
