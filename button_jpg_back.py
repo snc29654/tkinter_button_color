@@ -50,6 +50,12 @@ class color_button(ttk.Combobox):
         lbl2 = tkinter.Label(text='縦数(y)')
         lbl2.place(x=950, y=180)
 
+        self.txt3 = tkinter.Entry(width=5)
+        self.txt3.place(x=1000, y=210)
+        self.txt3.insert(tkinter.END,"2")
+
+        lbl3 = tkinter.Label(text='サイズ')
+        lbl3.place(x=950, y=210)
 
 
 
@@ -120,6 +126,8 @@ class color_button(ttk.Combobox):
         self.color = self.get()        
     def setnumber(self):
         
+        font_size =int(self.txt3.get())
+
         column_max =int(self.txt1.get())
         row_max =int(self.txt2.get())
         for file in self.filenames:
@@ -147,12 +155,12 @@ class color_button(ttk.Combobox):
 
                 text=f'{i}'
                 if (self.button_disp == 1):
-                    btn = tk.Button(root, text="    ")
+                    btn = tk.Button(root, text="  ",font=("", font_size))
                     btn.grid(column=column, row=row)
                     btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
                 self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
         self.f.close()
-        self.counter="end"
+        self.counter="終了"
         self.end=1
     def collback(self,btn):
         def nothing():
@@ -166,7 +174,7 @@ class color_button(ttk.Combobox):
     def update_counter(self):
         while(1):
             self.lable = tkinter.Label(text=self.counter, width=8, height=2,font=('Helvetica', '20'), fg='white', bg='black')
-            self.lable.place(x=950, y=210)
+            self.lable.place(x=950, y=300)
             if(self.end==1):
                 break
             time.sleep(0.2)
