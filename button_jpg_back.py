@@ -120,6 +120,8 @@ class color_button(ttk.Combobox):
         thread2 = threading.Thread(target=self.update_counter)
         thread2.start()
 
+    def button6_clicked(self):  
+        exit (0)
 
 
     def show_selected(self, event):
@@ -162,6 +164,10 @@ class color_button(ttk.Combobox):
         self.f.close()
         self.counter="終了"
         self.end=1
+        button6= Button(root, text=u'アプリ終了　時間がかかります', font=8,command=self.button6_clicked)  
+        button6.grid(row=0, column=1)  
+        button6.place(x=800, y=500) 
+
     def collback(self,btn):
         def nothing():
             global color
