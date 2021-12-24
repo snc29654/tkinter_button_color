@@ -93,7 +93,6 @@ class color_button(ttk.Combobox):
         fTyp = [('', '*')] 
         iDir = os.path.abspath(os.path.dirname(__file__)) 
         self.filenames = tkFileDialog.askopenfilenames(filetypes= [("JPEG", ".jpg")], initialdir=iDir)
-        self.f = open(r"C:\xampp\htdocs\xampp\shishu\color_code.txt", "w")
 
         if(self.filenames != ""):
             button4= Button(root, text=u'表示', font=24,command=self.button4_clicked,bg='#f0e68c')  
@@ -114,6 +113,7 @@ class color_button(ttk.Combobox):
         thread2.start()
 
     def button5_clicked(self):  
+        self.f = open(r"C:\xampp\htdocs\xampp\shishu\color_code.txt", "w")
         self.button_disp=0
         thread1 = threading.Thread(target=self.setnumber)
         thread1.start()
@@ -160,8 +160,11 @@ class color_button(ttk.Combobox):
                     btn = tk.Button(root, text="  ",font=("", font_size))
                     btn.grid(column=column, row=row)
                     btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
-                self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
-        self.f.close()
+
+                if (self.button_disp == 0):
+                    self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
+        if (self.button_disp == 0):
+            self.f.close()
         self.counter="終了"
         self.end=1
         button6= Button(root, text=u'アプリ終了　時間がかかります', font=8,command=self.button6_clicked)  
