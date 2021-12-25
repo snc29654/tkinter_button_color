@@ -189,6 +189,10 @@ class color_button(ttk.Combobox):
                 if (self.button_disp == 0):
                     self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
         while(1):
+            width, height = image3.size
+
+            column_step=int(width/column_max)        
+            row_step=int(height/row_max)
             column = -1
             row = 0
             for i in range(column_max*row_max+1):
@@ -208,6 +212,10 @@ class color_button(ttk.Combobox):
                         btn[i].config(bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
 
 
+            width, height = image4.size
+
+            column_step=int(width/column_max)        
+            row_step=int(height/row_max)
 
             column = -1
             row = 0
@@ -227,6 +235,10 @@ class color_button(ttk.Combobox):
                         btn[i].grid(column=column, row=row)
                         btn[i].config(bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
 
+            width, height = image2.size
+
+            column_step=int(width/column_max)        
+            row_step=int(height/row_max)
 
             column = -1
             row = 0
