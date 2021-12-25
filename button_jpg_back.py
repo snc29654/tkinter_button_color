@@ -141,7 +141,7 @@ class color_button(ttk.Combobox):
         row_step=int(height/row_max)
         print(width, height)
         print(column_step,row_step)
-                
+        btn=[0]*8100        
         column = -1
         row = 0
         for i in range(column_max*row_max+1):
@@ -157,12 +157,32 @@ class color_button(ttk.Combobox):
 
                 text=f'{i}'
                 if (self.button_disp == 1):
-                    btn = tk.Button(root, text="  ",font=("", font_size))
-                    btn.grid(column=column, row=row)
-                    btn.config(command=self.collback(btn),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
+                    btn[i] = tk.Button(root, text="  ",font=("", font_size))
+                    btn[i].grid(column=column, row=row)
+                    btn[i].config(command=self.collback(btn[i]))
 
                 if (self.button_disp == 0):
                     self.f.write(self.from_rgb_to_colorcode((self.r, self.g, self.b))+"\n")
+
+        column = -1
+        row = 0
+        for i in range(column_max*row_max+1):
+            self.counter=str(i)
+            if i > 0:
+                if i%column_max == 1:
+                    row += 1 
+                    column = -1
+                column += 1
+
+
+                self.r, self.g, self.b = image2.getpixel((column*column_step, row*row_step))
+
+                text=f'{i}'
+                if (self.button_disp == 1):
+                    btn[i].grid(column=column, row=row)
+                    btn[i].config(bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
+
+
         if (self.button_disp == 0):
             self.f.close()
         self.counter="終了"
