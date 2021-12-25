@@ -141,7 +141,7 @@ class color_button(ttk.Combobox):
         row_step=int(height/row_max)
         print(width, height)
         print(column_step,row_step)
-        lbl=[0]*8000        
+        lbl=[0]*8100        
         column = -1
         row = 0
         for i in range(column_max*row_max+1):
