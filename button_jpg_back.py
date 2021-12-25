@@ -183,6 +183,46 @@ class color_button(ttk.Combobox):
                     btn[i].config(bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
 
 
+
+        column = -1
+        row = 0
+        for i in range(column_max*row_max+1):
+            self.counter=str(i)
+            if i > 0:
+                if i%column_max == 1:
+                    row += 1 
+                    column = -1
+                column += 1
+
+
+                self.r, self.g, self.b = image2.getpixel((column*column_step, row*row_step))
+
+                text=f'{i}'
+                if (self.button_disp == 1):
+                    btn[i].grid(column=column, row=row)
+                    btn[i].config(bg='#000000')
+
+
+        column = -1
+        row = 0
+        for i in range(column_max*row_max+1):
+            self.counter=str(i)
+            if i > 0:
+                if i%column_max == 1:
+                    row += 1 
+                    column = -1
+                column += 1
+
+
+                self.r, self.g, self.b = image2.getpixel((column*column_step, row*row_step))
+
+                text=f'{i}'
+                if (self.button_disp == 1):
+                    btn[i].grid(column=column, row=row)
+                    btn[i].config(bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
+
+
+
         if (self.button_disp == 0):
             self.f.close()
         self.counter="終了"
