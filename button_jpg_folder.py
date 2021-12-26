@@ -38,7 +38,7 @@ class color_button(ttk.Combobox):
 # テキストボックス
         self.txt1 = tkinter.Entry(width=5)
         self.txt1.place(x=1000, y=150)
-        self.txt1.insert(tkinter.END,"40")
+        self.txt1.insert(tkinter.END,"20")
         
         lbl1 = tkinter.Label(text='横数(x)')
         lbl1.place(x=950, y=150)
