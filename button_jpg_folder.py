@@ -190,7 +190,7 @@ class color_button(ttk.Combobox):
                         if(first_flag==1):
                             btn[i] = tk.Button(root, text="  ",font=("", font_size))
                             btn[i].grid(column=column, row=row)
-                            btn[i].config(command=self.collback(btn[i]))
+                            btn[i].config(command=self.collback(btn[i]),bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
 
                         btn[i].grid(column=column, row=row)
                         btn[i].config(bg=self.from_rgb_to_colorcode((self.r, self.g, self.b)))
