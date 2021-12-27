@@ -78,8 +78,11 @@ class color_button(ttk.Combobox):
         
         button10 = Button(root, text=u'フォルダー選択', command=self.button10_clicked)  
         button10.grid(row=0, column=1)  
-        button10.place(x=950, y=570) 
+        button10.place(x=950, y=370) 
         
+        button11 = Button(root, text=u'停止', command=self.button11_clicked)  
+        button11.grid(row=0, column=1)  
+        button11.place(x=950, y=420) 
         
         self.var = var                      
         self.bind(                          
@@ -115,6 +118,9 @@ class color_button(ttk.Combobox):
         iDir = os.path.abspath(os.path.dirname(__file__)) 
         self.filenames4 = tkFileDialog.askopenfilenames(filetypes= [("JPEG", ".jpg")], initialdir=iDir)
 
+
+    def button11_clicked(self):  
+        self.end=1
 
     def button10_clicked(self):  
         
@@ -165,6 +171,9 @@ class color_button(ttk.Combobox):
         btn=[0]*8100        
         first_flag=0
         for file in self.filenames:
+            if(self.end==1):
+                break
+
             first_flag += 1
             img10 = Image.open(file)
             image10 = img10.convert('RGB')
@@ -203,9 +212,9 @@ class color_button(ttk.Combobox):
             self.f.close()
         self.counter="終了"
         self.end=1
-        button6= Button(root, text=u'アプリ終了　時間がかかります', font=8,command=self.button6_clicked)  
+        button6= Button(root, text=u'閉じる', font=8,command=self.button6_clicked)  
         button6.grid(row=0, column=1)  
-        button6.place(x=800, y=500) 
+        button6.place(x=950, y=500) 
 
     def collback(self,btn):
         def nothing():
