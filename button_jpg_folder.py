@@ -79,10 +79,14 @@ class color_button(ttk.Combobox):
         button10 = Button(root, text=u'フォルダー選択', command=self.button10_clicked)  
         button10.grid(row=0, column=1)  
         button10.place(x=950, y=370) 
+
+        button13= Button(root, text=u'ファイル選択', command=self.button13_clicked)  
+        button13.grid(row=0, column=1)  
+        button13.place(x=950, y=400) 
         
         button11 = Button(root, text=u'停止', command=self.button11_clicked)  
         button11.grid(row=0, column=1)  
-        button11.place(x=950, y=420) 
+        button11.place(x=950, y=430) 
         
         self.var = var                      
         self.bind(                          
@@ -121,6 +125,18 @@ class color_button(ttk.Combobox):
 
     def button11_clicked(self):  
         self.end=1
+
+    def button13_clicked(self):  
+
+
+        fTyp = [('', '*')] 
+        iDir = os.path.abspath(os.path.dirname(__file__)) 
+        self.filenames = tkFileDialog.askopenfilenames(filetypes= [("Image file", ".bmp .png .jpg .tif"), ("Bitmap", ".bmp"), ("PNG", ".png"), ("JPEG", ".jpg"), ("Tiff", ".tif") ], initialdir=iDir)
+
+        if(self.filenames != ""):
+            button4= Button(root, text=u'表示', font=24,command=self.button4_clicked,bg='#f0e68c')  
+            button4.grid(row=0, column=1)  
+            button4.place(x=950, y=110) 
 
     def button10_clicked(self):  
         
