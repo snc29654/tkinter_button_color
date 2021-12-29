@@ -183,13 +183,11 @@ class color_button(ttk.Combobox):
             row_step=int(height/row_max)
             column = -1
             row = 0
-            for i in range(column_max*row_max+1):
-                self.counter=str(i)
-                if i > 0:
-                    if i%column_max == 1:
-                        row += 1 
-                        column = -1
-                    column += 1
+            i=0
+            for row in range(row_max):
+                for column in range(column_max):
+                    i=i+1
+                    self.counter=str(i)
 
 
                     self.r, self.g, self.b = image10.getpixel((column*column_step, row*row_step))
